@@ -62,13 +62,6 @@ public/
 Se utiliza el marcador **Hiro** de AR.js. Descargar e imprimir desde:
 [https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png](https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png)
 
-## Integrantes
-
-- [ ] Nombre 1 — Coordinador
-- [ ] Nombre 2 — Investigación
-- [ ] Nombre 3 — Desarrollo
-- [ ] Nombre 4 — RA/3D
-- [ ] Nombre 5 — Diseño / QA
 
 ## Curso
 Tecnologías Emergentes — USIL
