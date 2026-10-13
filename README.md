@@ -13,13 +13,19 @@ Libro educativo interactivo complementado con una aplicación web de Realidad Au
 - **Realidad Aumentada**: AR.js
 - **Entorno**: GitHub Codespaces
 
-## Ejecutar
+## Ejecutar Localmente
 
 ```bash
-npx --yes http-server public -p 8000 -a 0.0.0.0
+npx --yes http-server public -p 8000
 ```
 
 Abrir en navegador: `http://localhost:8000`
+
+## Despliegue Web (GitHub Pages)
+
+El proyecto está preparado para publicarse con **GitHub Pages** (HTTPS automático, obligatorio para acceso a cámara web en celulares y computadoras).
+URL generada: `https://<tu-usuario>.github.io/<tu-repositorio>/`
+
 
 ## Estructura del Proyecto
 
