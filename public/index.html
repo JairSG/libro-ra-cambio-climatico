@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 Planeta en Riesgo — Libro RA Cambio Climático</title>
+    <meta name="description" content="Libro educativo interactivo sobre cambio climático con realidad aumentada. Enfoca el marcador para ver modelos 3D y animaciones.">
+
+    <!-- ===== LIBRERÍAS: Orden obligatorio A-Frame → AR.js ===== -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <!-- ===== SCRIPTS PROPIOS ===== -->
+    <script src="js/escena.js"></script>
+    <script src="js/objetos.js"></script>
+    <script src="js/libro.js"></script>
+    <script src="js/interacciones.js"></script>
+
+    <!-- ===== ESTILOS ===== -->
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body style="margin: 0; overflow: hidden;">
+
+    <!-- ===================================================================
+         PANEL DE INTERFAZ DE USUARIO
+         Ocupa la parte superior de la pantalla sin bloquear la cámara
+         =================================================================== -->
+    <div id="ui-panel">
+        <h1 id="ui-titulo">🌍 Planeta en Riesgo</h1>
+
+        <!-- Selector de página -->
+        <div id="ui-selector">
+            <label for="select-pagina">Página:</label>
+            <select id="select-pagina">
+                <option value="1">1 — ¿Qué es el cambio climático?</option>
+                <option value="2">2 — Causas principales</option>
+                <option value="3">3 — Consecuencias</option>
+                <option value="4">4 — Impacto en ecosistemas</option>
+                <option value="5">5 — Soluciones y mitigación</option>
+            </select>
+        </div>
+
+        <!-- Texto educativo de la página actual -->
+        <div id="ui-info">
+            <p id="info-texto">Enfoca el marcador Hiro para ver el contenido de Realidad Aumentada.</p>
+        </div>
+
+        <!-- Controles -->
+        <div id="ui-controles">
+            <button id="btn-pausar" onclick="togglePausa()">⏸ Pausar</button>
+        </div>
+
+        <!-- Estado del marcador -->
+        <div id="ui-estado">
+            <span id="estado-marcador">⏳ Buscando marcador...</span>
+        </div>
+    </div>
+
+    <!-- ===================================================================
+         ESCENA DE REALIDAD AUMENTADA
+         AR.js detecta el marcador Hiro y posiciona el contenido 3D
+         =================================================================== -->
+    <a-scene
+        embedded
+        arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+        vr-mode-ui="enabled: false"
+        renderer="logarithmicDepthBuffer: true; precision: mediump;">
+
+        <!-- ===== MARCADOR HIRO ===== -->
+        <a-marker preset="hiro" marker-status>
+
+            <!-- ============================================
+                 PÁGINA 1: ¿Qué es el cambio climático?
+                 Tierra con capa de gases de efecto invernadero
+                 ============================================ -->
+            <a-entity id="pagina-1" visible="true" position="0 0 0">
+                <!-- Tierra -->
+                <a-sphere
+                    radius="0.5"
+                    color="#2E86C1"
+                    position="0 0.6 0"
+                    animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
+                </a-sphere>
+                <!-- Capa de gases (Three.js) -->
+                <a-entity position="0 0.6 0" capa-gases scale="0.4 0.4 0.4"></a-entity>
+            </a-entity>
+
+            <!-- ============================================
+                 PÁGINA 2: Causas principales
+                 Fábrica con emisiones de humo
+                 ============================================ -->
+            <a-entity id="pagina-2" visible="false" position="0 0 0">
+                <!-- Estructura de la fábrica -->
+                <a-box width="0.5" height="0.6" depth="0.4" color="#5D6D7E" position="0 0.3 0"></a-box>
+                <!-- Ventanas -->
+                <a-box width="0.15" height="0.2" depth="0.01" color="#2C3E50" position="-0.1 0.25 0.21" opacity="0.7"></a-box>
+                <a-box width="0.15" height="0.2" depth="0.01" color="#2C3E50" position="0.1 0.25 0.21" opacity="0.7"></a-box>
+                <!-- Chimenea -->
+                <a-cylinder radius="0.05" height="0.4" color="#717D7E" position="0.15 0.7 0"></a-cylinder>
+                <!-- Partículas de humo (Three.js) -->
+                <a-entity position="0.15 0.9 0" particulas-humo></a-entity>
+            </a-entity>
+
+            <!-- ============================================
+                 PÁGINA 3: Consecuencias
+                 Iceberg derritiéndose con gotas de agua
+                 ============================================ -->
+            <a-entity id="pagina-3" visible="false" position="0 0 0">
+                <!-- Iceberg -->
+                <a-cone
+                    radius-bottom="0.4"
+                    radius-top="0.1"
+                    height="0.7"
+                    color="#D6EAF8"
+                    position="0 0.35 0"
+                    animation="property: scale; from: 1 1 1; to: 0.8 0.7 0.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutSine">
+                </a-cone>
+                <!-- Agua -->
+                <a-plane
+                    width="1.2"
+                    height="1.2"
+                    color="#2980B9"
+                    opacity="0.4"
+                    rotation="-90 0 0"
+                    position="0 0.05 0">
+                </a-plane>
+                <!-- Gotas de deshielo (Three.js) -->
+                <a-entity position="0 0.5 0" gotas-agua></a-entity>
+            </a-entity>
+
+            <!-- ============================================
+                 PÁGINA 4: Impacto en ecosistemas
+                 Árbol que cambia de verde a seco
+                 ============================================ -->
+            <a-entity id="pagina-4" visible="false" position="0 0 0">
+                <!-- Tronco -->
+                <a-cylinder radius="0.05" height="0.6" color="#6E2C00" position="0 0.3 0"></a-cylinder>
+                <!-- Copa -->
+                <a-sphere
+                    radius="0.3"
+                    color="#27AE60"
+                    position="0 0.8 0"
+                    animation="property: color; from: #27AE60; to: #F39C12; dir: alternate; loop: true; dur: 4000; easing: easeInOutSine">
+                </a-sphere>
+                <!-- Hojas cayendo -->
+                <a-sphere
+                    position="0.2 0.6 0.1"
+                    radius="0.03"
+                    color="#E67E22"
+                    animation="property: position; to: 0.3 0.05 0.15; dur: 3000; loop: true; easing: easeInQuad">
+                </a-sphere>
+                <a-sphere
+                    position="-0.15 0.55 -0.1"
+                    radius="0.025"
+                    color="#D35400"
+                    animation="property: position; to: -0.25 0.05 -0.15; dur: 3500; loop: true; delay: 500; easing: easeInQuad">
+                </a-sphere>
+                <!-- Suelo -->
+                <a-circle radius="0.5" color="#784212" rotation="-90 0 0" position="0 0.01 0"></a-circle>
+            </a-entity>
+
+            <!-- ============================================
+                 PÁGINA 5: Soluciones y mitigación
+                 Turbina eólica con aspas giratorias
+                 ============================================ -->
+            <a-entity id="pagina-5" visible="false" position="0 0 0">
+                <!-- Turbina eólica (Three.js) -->
+                <a-entity turbina-eolica scale="0.6 0.6 0.6"></a-entity>
+                <!-- Base -->
+                <a-circle radius="0.4" color="#2C3E50" rotation="-90 0 0" position="0 0.01 0"></a-circle>
+            </a-entity>
+
+        </a-marker>
+
+        <!-- ===== CÁMARA ===== -->
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+</html>

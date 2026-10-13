@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 Planeta en Riesgo — Libro de Realidad Aumentada</title>
+    <meta name="description" content="Portal de acceso al proyecto de Realidad Aumentada: Planeta en Riesgo. Actividad Lab 07 - Tecnologías Emergentes.">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 33, 62, 0.7);
+            --card-border: rgba(46, 134, 193, 0.35);
+            --accent-blue: #2E86C1;
+            --accent-cyan: #48CAE4;
+            --accent-green: #2ECC71;
+            --text-main: #f0f4f8;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at 50% 10%, #1a2a4a 0%, var(--bg-color) 70%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(46, 134, 193, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid var(--card-border);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(46, 134, 193, 0.4);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 25px rgba(0, 150, 255, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2E86C1 0%, #1B4F72 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3498DB 0%, #2E86C1 100%);
+            box-shadow: 0 6px 20px rgba(72, 202, 228, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-cyan);
+        }
+
+        /* Sección de Marcador */
+        .marker-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .marker-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--accent-cyan);
+        }
+
+        .marker-section p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 16px;
+        }
+
+        .marker-img {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            border: 4px solid #ffffff;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="badge">Actividad Lab 07 — Tecnologías Emergentes</span>
+            <h1>📖 Planeta en Riesgo</h1>
+            <p class="subtitle">Libro educativo interactivo sobre Cambio Climático en Realidad Aumentada (A-Frame + Three.js + AR.js)</p>
+        </header>
+
+        <div class="grid">
+            <!-- Tarjeta 1: Experiencia RA -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">📱</div>
+                    <h2>Experiencia RA Completa</h2>
+                    <p>Usa la cámara de tu dispositivo y apunta al <strong>Marcador Hiro</strong> para ver los modelos 3D flotando sobre la realidad con animaciones interactivas.</p>
+                </div>
+                <a href="public/index.html" class="btn btn-primary">Lanzar con Cámara (AR)</a>
+            </div>
+
+            <!-- Tarjeta 2: Vista 3D Directa -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">🖥️</div>
+                    <h2>Modo 3D (Sin Cámara)</h2>
+                    <p>¿Sin cámara o sin marcador a la mano? Explora las 5 páginas del libro en un visor 3D interactivo con órbita 360° y controles de navegación.</p>
+                </div>
+                <a href="public/vista3d.html" class="btn btn-secondary">Abrir Visor 3D Directo</a>
+            </div>
+
+            <!-- Tarjeta 3: Prototipo Inicial -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">🧪</div>
+                    <h2>Prototipo A-Frame</h2>
+                    <p>Escena base de validación técnica con la Tierra 3D, simulación de atmósfera y la turbina eólica en rotación continua.</p>
+                </div>
+                <a href="public/aframe.html" class="btn btn-secondary">Ver Prototipo A-Frame</a>
+            </div>
+        </div>
+
+        <!-- Sección del Marcador Hiro -->
+        <div class="marker-section">
+            <h3>🎯 Marcador Hiro para la Realidad Aumentada</h3>
+            <p>Apunta tu cámara hacia esta imagen (puedes mostrarla en la pantalla de tu celular o imprimirla):</p>
+            <div>
+                <img class="marker-img" src="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" alt="Marcador Hiro Oficial">
+            </div>
+            <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.85rem; padding: 8px 14px;">Descargar Marcador en Alta Calidad</a>
+        </div>
+
+        <footer>
+            Proyecto Universitario USIL — Tecnologías Emergentes | Desarrollado con HTML5, CSS3, JavaScript, A-Frame y AR.js
+        </footer>
+    </div>
+
+</body>
+</html>

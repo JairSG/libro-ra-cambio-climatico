@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo A-Frame — Cambio Climático</title>
+    <meta name="description" content="Prototipo A-Frame para el libro educativo de realidad aumentada sobre cambio climático">
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="js/escena.js"></script>
+    <script src="js/objetos.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        #info-prototipo {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 999;
+            background: rgba(10, 10, 30, 0.85);
+            color: #85C1E9;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            border: 1px solid rgba(46, 134, 193, 0.3);
+            backdrop-filter: blur(8px);
+        }
+        #info-prototipo h2 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: #2E86C1;
+        }
+    </style>
+</head>
+<body>
+    <div id="info-prototipo">
+        <h2>🎮 Prototipo A-Frame</h2>
+        <p>Tierra con capa de gases de efecto invernadero</p>
+    </div>
+
+    <a-scene>
+        <!-- ===== TIERRA (placeholder) ===== -->
+        <a-sphere
+            position="0 1.5 -4"
+            radius="1"
+            color="#2E86C1"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear"
+            info-panel="titulo: La Tierra; descripcion: Nuestro planeta se calienta debido a los gases de efecto invernadero">
+        </a-sphere>
+
+        <!-- ===== CAPA DE GASES (Three.js) ===== -->
+        <a-entity position="0 1.5 -4" capa-gases></a-entity>
+
+        <!-- ===== TURBINA DE PRUEBA ===== -->
+        <a-entity position="3 0 -5" turbina-eolica></a-entity>
+
+        <!-- ===== ESCENARIO ===== -->
+        <a-plane
+            position="0 0 -4"
+            rotation="-90 0 0"
+            width="12"
+            height="12"
+            color="#1B4F72"
+            opacity="0.8">
+        </a-plane>
+
+        <!-- ===== CIELO ===== -->
+        <a-sky color="#0B1A2E"></a-sky>
+
+        <!-- ===== ILUMINACIÓN ===== -->
+        <a-light type="ambient" color="#445566" intensity="0.6"></a-light>
+        <a-light type="directional" position="2 4 1" color="#FFFFFF" intensity="0.8"></a-light>
+
+        <!-- ===== CÁMARA ===== -->
+        <a-entity
+            camera
+            position="0 1.6 0"
+            look-controls
+            wasd-controls>
+        </a-entity>
+    </a-scene>
+</body>
+</html>
